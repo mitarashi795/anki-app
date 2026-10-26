@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaced Repetition & AI App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Anki Clone + AI</h1>
+        
+        <div id="dashboard">
+            <button onclick="startStudy()">学習を始める</button>
+            <div id="add-card-section">
+                <h3>単語を追加</h3>
+                <input type="text" id="new-word" placeholder="単語 (Word)">
+                <input type="text" id="new-meaning" placeholder="意味 (Meaning)">
+                <select id="new-pos">
+                    <option value="Noun">名詞</option>
+                    <option value="Verb">動詞</option>
+                    <option value="Adjective">形容詞</option>
+                    <option value="Adverb">副詞</option>
+                </select>
+                <button onclick="addCard()">追加</button>
+            </div>
+        </div>
+
+        <div id="study-area" style="display: none;">
+            <h2 id="study-word">Word</h2>
+            
+            <div id="pos-quiz">
+                <p>この単語の品詞は？</p>
+                <button onclick="checkPos('Noun')">名詞</button>
+                <button onclick="checkPos('Verb')">動詞</button>
+                <button onclick="checkPos('Adjective')">形容詞</button>
+                <button onclick="checkPos('Adverb')">副詞</button>
+            </div>
+
+            <div id="meaning-area" style="display: none;">
+                <p>正解の品詞: <span id="correct-pos"></span></p>
+                <h3 id="study-meaning">Meaning</h3>
+                <div class="rating-buttons">
+                    <button onclick="rateCard(0)">Again (忘れた)</button>
+                    <button onclick="rateCard(3)">Hard (難しい)</button>
+                    <button onclick="rateCard(4)">Good (普通)</button>
+                    <button onclick="rateCard(5)">Easy (簡単)</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ai-quiz-area" style="display: none;">
+            <h2>🎉 今日の学習は完了しました！</h2>
+            <p>AIによる拡張クイズに挑戦しましょう。</p>
+            <button id="generate-ai-btn" onclick="generateAiQuiz()">クイズを生成</button>
+            <div id="ai-loading" style="display:none;">AIが問題を生成中...</div>
+            <div id="ai-quiz-content" style="display:none;">
+                <h3 id="ai-word"></h3>
+                <p id="ai-question"></p>
+                <div id="ai-options"></div>
+                <div id="ai-result" style="display:none;">
+                    <p id="ai-explanation"></p>
+                    <button onclick="location.reload()">ダッシュボードに戻る</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
